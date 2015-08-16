@@ -72,12 +72,18 @@ module.exports = app;
 
 var Session = require('./models/session');
 
-var testSessionHIMom = new Session({
-  code: 'testhimom',
-});
+// var testSessionHIMom = new Session({
+//   code: 'testhimom',
+// });
 
-testSessionHIMom.save(function(err) {
+// testSessionHIMom.save(function(err) {
+//   if (err) throw err;
+//   console.log('Session creation was successful!');
+// });
+
+Session.find({}, function(err, sessions) {
   if (err) throw err;
-  console.log('Session was saved successfully!');
+  console.log('query db for sessions')
+  console.log(sessions);
 });
 
