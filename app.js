@@ -35,7 +35,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Allow Cross-Origin Sharing Resource
+// allow Cross-Origin Sharing Resource
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
@@ -74,6 +74,19 @@ app.use(function(err, req, res, next) {
   res.render('error', {
     message: err.message,
     error: {}
+  });
+});
+
+// socket.io
+var io = require('socket.io')();
+app.io = io;
+
+// socket.io events
+io.on('connection', function(socket) {
+  console.log('A user connected.');
+
+  socket.on('disconnect', function() {
+    console.log('A user disconnected.')
   });
 });
 
