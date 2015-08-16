@@ -19,7 +19,7 @@ router.get('/:session_code', function(req, res, next) {
   Session.find({ code: req.params.session_code }, function(err, sessions) {
     if (err) throw err;
 
-    res.json(sessions);
+    res.json(sessions[0]);
   });
 
 });
