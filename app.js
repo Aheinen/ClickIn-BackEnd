@@ -12,15 +12,14 @@ var mongoose = require('mongoose');
 
 var app = express();
 
-// mongoose.connect('mongodb://localhost/27017');
-mongoose.connect('mongodb://clickteam:clickclick@ds059702.mongolab.com:59702/clickin_test');
+// mongoose.connect('mongodb://localhost/27017'); // this is just for local hosting
+mongoose.connect('mongodb://clickteam:clickclick@ds059702.mongolab.com:59702/clickin_test'); // we can easily setup additonal databases to allow for production vs. test environments
 
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function (callback) {
   console.log("YAY! we connected")
 });
-
 
 
 // view engine setup
@@ -69,5 +68,16 @@ app.use(function(err, req, res, next) {
   });
 });
 
-
 module.exports = app;
+
+var Session = require('./models/session');
+
+var testSessionHIMom = new Session({
+  code: 'testhimom',
+});
+
+testSessionHIMom.save(function(err) {
+  if (err) throw err;
+  console.log('Session was saved successfully!');
+});
+
