@@ -21,3 +21,18 @@ e.g. db.sessionscollection.insert({code: "HI"})
 13. mongo > db.namecollection.find()
 e.g. db.sessionscollection.find()
 14. mongo > show dbs
+
+
+##Linking MongoDB via Mongoose
+1. `npm install --save mongoose'
+2. In app.js
+```
+var mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost/test');
+//
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function (callback) {
+  console.log("YAY you connected!")
+});
+```

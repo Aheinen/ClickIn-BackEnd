@@ -9,7 +9,20 @@ var routes = require('./routes/index');
 var users = require('./routes/users');
 var sessions = require('./routes/sessions');
 
+var mongoose = require('mongoose');
+
 var app = express();
+
+// mongoose.connect('mongodb://localhost/27017');
+mongoose.connect('mongodb://clickteam:clickclick@ds059702.mongolab.com:59702/clickin_test');
+
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function (callback) {
+  console.log("YAY! we connected")
+});
+
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
