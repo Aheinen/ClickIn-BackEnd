@@ -3,6 +3,7 @@ var Schema = mongoose.Schema;
 
 var sessionSchema = new Schema({
   code: String,
+  ended: Boolean,
   poll: {
     question: {content: String, count: Number},
     answers: [{id: Number, content: String, count: Number},

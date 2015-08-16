@@ -60,6 +60,19 @@ router.post('/', function(req, res, next) {
   newSession.save(function(err) {
     if (err) throw err;
 
+    setTimeout(function() {
+      console.log('Session has ended');
+
+      newSession.ended = true;
+
+      newSession.save(function(err) {
+        if (err) throw err;
+
+        var io = require('../app').io;
+        io.sockets.emit('end', sessions[0]);
+      });
+    }, 180000);
+
     res.json({ result: "success" });
   });
 
