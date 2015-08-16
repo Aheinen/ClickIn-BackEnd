@@ -39,6 +39,9 @@ router.patch('/:session_code', function(req, res, next) {
     sessions[0].save(function(err) {
       if (err) throw err;
 
+      var io = require('../app').io;
+      io.sockets.emit('result', sessions[0]);
+
       res.json(sessions[0]);
     });
 
