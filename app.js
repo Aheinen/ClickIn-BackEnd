@@ -22,6 +22,18 @@ db.once('open', function (callback) {
   console.log("YAY! we connected")
 });
 
+// socket.io
+var io = require('socket.io')();
+app.io = io;
+
+// socket.io events
+io.on('connection', function(socket) {
+  console.log('A user connected.');
+
+  socket.on('disconnect', function() {
+    console.log('A user disconnected.')
+  });
+});
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -75,19 +87,6 @@ app.use(function(err, req, res, next) {
   res.render('error', {
     message: err.message,
     error: {}
-  });
-});
-
-// socket.io
-var io = require('socket.io')();
-app.io = io;
-
-// socket.io events
-io.on('connection', function(socket) {
-  console.log('A user connected.');
-
-  socket.on('disconnect', function() {
-    console.log('A user disconnected.')
   });
 });
 
