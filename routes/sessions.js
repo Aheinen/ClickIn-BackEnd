@@ -24,7 +24,7 @@ router.get('/:session_code', function(req, res, next) {
 
 });
 
-// Update session by code
+// PATCH session by code
 router.patch('/:session_code', function(req, res, next) {
 
   Session.find({ code: req.params.session_code }, function(err, sessions) {
@@ -32,6 +32,7 @@ router.patch('/:session_code', function(req, res, next) {
 
     for (var i = 0; i < sessions[0].poll.answers.length; i++) {
       if (sessions[0].poll.answers[i].id === req.body.id) {
+        sessions[0].poll.question.count++;
         sessions[0].poll.answers[i].count++;
       }
     }
@@ -49,7 +50,7 @@ router.patch('/:session_code', function(req, res, next) {
 
 });
 
-// Post new session
+// POST new session
 router.post('/', function(req, res, next) {
 
   var newSession = new Session(req.body);
