@@ -72,14 +72,3 @@ app.use(function(err, req, res, next) {
 
 module.exports = app;
 
-var Session = require('./models/session');
-
-var testSessionHIMom = new Session({
-  code: 'testhimom',
-});
-
-testSessionHIMom.save(function(err) {
-  if (err) throw err;
-  console.log('Session was saved successfully!');
-});
-
