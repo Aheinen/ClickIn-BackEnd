@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
+var sessions = require('./routes/sessions');
 
 var mongoose = require('mongoose');
 
@@ -36,6 +37,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/users', users);
+app.use('/api/sessions', sessions);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -70,7 +72,9 @@ app.use(function(err, req, res, next) {
 
 module.exports = app;
 
-var Session = require('./models/session');
+
+// test crud to mongolab
+// var Session = require('./models/session');
 
 // var testSessionHIMom = new Session({
 //   code: 'testhimom',
@@ -81,9 +85,8 @@ var Session = require('./models/session');
 //   console.log('Session creation was successful!');
 // });
 
-Session.find({}, function(err, sessions) {
-  if (err) throw err;
-  console.log('query db for sessions')
-  console.log(sessions);
-});
-
+// Session.find({}, function(err, sessions) {
+//   if (err) throw err;
+//   console.log('query db for sessions')
+//   console.log(sessions);
+// });
